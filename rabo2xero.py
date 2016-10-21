@@ -16,7 +16,7 @@ import collections
 import csv
 
 def main():
-    if len(sys.argv) == 2:
+    if len(sys.argv) is not 2:
         print 'ERROR: provide a full path to the csv file as the first argument, and the output file as the second'
         return
     with open(sys.argv[1], 'rt') as input_file, open(sys.argv[2], 'wt') as output_file:
