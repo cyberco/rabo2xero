@@ -24,19 +24,15 @@ def main():
         writer = csv.writer(output_file, quoting=csv.QUOTE_ALL)
         xero = collections.OrderedDict()
         for row in reader:
-            print row
-            if len(row) != 19:
+            if len(row) != 26:
                 continue
-            # if debit tx inverse amount
-            if row[3] == 'D':
-                row[4] = '-' + row[4]
-            xero['date'] = row[7]
-            xero['amount'] = row[4]
-            xero['payee'] = row[6]
+            xero['date'] = row[4]
+            xero['amount'] = row[6].replace(',', '.')
+            xero['payee'] = row[9]
             # 'reference' is END_TO_END_ID (SEPA Credit Transfer)
-            xero['reference'] = row[16]
-            xero['description'] = ''.join(row[10:16])
-            xero['transaction_type'] = row[8]
+            xero['reference'] = row[15]
+            xero['description'] = ''.join(row[19:22])
+            print xero.values()
             writer.writerow(xero.values())
 
 if __name__ == '__main__':
